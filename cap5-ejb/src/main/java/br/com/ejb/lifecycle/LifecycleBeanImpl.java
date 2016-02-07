@@ -10,9 +10,9 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 /**
- * O ciclo de vida de um EJB Stateless é muito simples e é composto de apenas 2 fases: "Does Not Exist" e "Method Ready Pool".
+ * O ciclo de vida de um EJB Stateless é muito simples e é composto de apenas 2 fases: "Does Not Exist" e "Method-Ready Pool".
  * Primeiramente o bean nao existente entrará na fase "Does Not Exist", quando o container criar uma instancia deste bean, o mesmo
- * passará para a fase "Method Ready Pool", durante a transicao, o container instancia o EJB atraves da chamada ao método Class.newInstance()
+ * passará para a fase "Method-Ready Pool", durante a transicao, o container instancia o EJB atraves da chamada ao método Class.newInstance()
  * (O EJB precisa possuir um construtor padrao sem argumentos para que o container possa criar a instancia do bean), inicializa o bean
  * injetando todos os objetos necessários, depois disso, o container invoca o método marcado com a anotacao @PostContruct e adiciona este
  * bean no pool de beans. Neste ponto, o EJB está pronto para atender as requisicoes e ter seus métodos invocados. O container pode, em algum
