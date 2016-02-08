@@ -86,6 +86,8 @@ public class LifecycleBeanImpl implements LifecycleBeanRemote {
 
 	/**
 	 * Método invocado quando o container desserializa o objeto e o traz novamente para a memoria e para a fase Method-Ready.
+	 * Assim como os metodos anotados com '@PostConstruct', '@PreDestroy' e '@PrePassivate', o método anotado com '@PostActivate'
+	 * pode possuir qualquer visibilidade, deve ser void e nao pode ser final ou estatico.
 	 */
 	@PostActivate
 	void postActivate() {
