@@ -1,4 +1,4 @@
-package br.com.ejb;
+package br.com.ejb.calculator;
 
 /**
  * Caso a anotação @Remote seja especificada na interface implementada pelo EJB e o mesmo não declarar essa anotação,

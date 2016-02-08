@@ -1,4 +1,4 @@
-package br.com.ejb;
+package br.com.ejb.calculator;
 
 /**
  * Created on 21/01/2016.

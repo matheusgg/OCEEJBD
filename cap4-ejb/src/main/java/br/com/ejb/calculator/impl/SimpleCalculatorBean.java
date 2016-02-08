@@ -1,7 +1,7 @@
-package br.com.ejb.impl;
+package br.com.ejb.calculator.impl;
 
-import br.com.ejb.CalculatorCommomBusiness;
-import br.com.ejb.CalculatorRemoteBusiness;
+import br.com.ejb.calculator.CalculatorCommomBusiness;
+import br.com.ejb.calculator.CalculatorRemoteBusiness;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
