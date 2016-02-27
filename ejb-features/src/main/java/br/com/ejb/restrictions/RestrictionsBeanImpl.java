@@ -126,6 +126,11 @@ public class RestrictionsBeanImpl implements RestrictionsRemoteBean {
 		log.info(bean.toString());
 
 		/*
+		 * EJBs nao devem encerrar a JVM
+		 */
+		// System.exit(0);
+
+		/*
 		 * ======================================================================================================================================
 		 * NÃO É POSSÍVEL E NAO DEVE SER UTILIZADO
 		 * ======================================================================================================================================

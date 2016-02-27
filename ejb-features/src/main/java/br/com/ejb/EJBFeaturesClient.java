@@ -1,6 +1,6 @@
 package br.com.ejb;
 
-import br.com.ejb.exceptions.ExceptionRemoteBean;
+import br.com.ejb.restrictions.RestrictionsRemoteBean;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -23,15 +23,15 @@ public class EJBFeaturesClient {
 		 * Restrictions
 		 * ======================================================================================================================================
 		 */
-		/*final RestrictionsRemoteBean bean = (RestrictionsRemoteBean) ctx.lookup("ejb-features/RestrictionsBeanImpl!br.com.ejb.restrictions.RestrictionsRemoteBean");
-		bean.testRestrictions();*/
+		final RestrictionsRemoteBean bean = (RestrictionsRemoteBean) ctx.lookup("ejb-features/RestrictionsBeanImpl!br.com.ejb.restrictions.RestrictionsRemoteBean");
+		bean.testRestrictions();
 
 		/*
 		 * ======================================================================================================================================
 		 * Exceptions
 		 * ======================================================================================================================================
 		 */
-		final ExceptionRemoteBean bean = (ExceptionRemoteBean) ctx.lookup("ejb-features/ExceptionBeanImpl!br.com.ejb.exceptions.ExceptionRemoteBean");
+//		final ExceptionRemoteBean bean = (ExceptionRemoteBean) ctx.lookup("ejb-features/ExceptionBeanImpl!br.com.ejb.exceptions.ExceptionRemoteBean");
 		//		bean.testRuntimeException();
 		//		bean.testHandlingRuntimeException();
 		//		bean.testIllegalAccessException();
@@ -39,7 +39,7 @@ public class EJBFeaturesClient {
 		//		bean.testSystemException();
 		//		bean.testApplicationException();
 		//		System.out.println(bean.testSystemExceptionAsync().get());
-		System.out.println(bean.testApplicationExceptionAsync().get());
+//		System.out.println(bean.testApplicationExceptionAsync().get());
 
 		/*
 		 * ======================================================================================================================================
