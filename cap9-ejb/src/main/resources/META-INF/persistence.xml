@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+	<persistence-unit name="cap9-ejb-PU" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<!-- Para utilizar as informacoes de conexao com o banco sem criar uma datasource no JBoss basta criar o modulo do driver
+				 desejado dentro do JBoss e adicionar a referencia deste modulo de driver no modulo do hibernate localizado em
+				 modules/org/hibernate/main/module.xml -->
+			<!-- Além da configuracao citada acima, todas as propriedade javax.persistence.* devem ser substituidas por propriedades
+				 especificas do provedor de persistencia (hibernate.connection) -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/ejb_db"/>
+			<property name="hibernate.connection.username" value="root"/>
+			<property name="hibernate.connection.password" value="root"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="current_session_context_class" value="thread"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		</properties>
+	</persistence-unit>
+</persistence>
