@@ -1,6 +1,7 @@
 package br.com.ejb;
 
 import br.com.ejb.persistence.mapping.Address;
+import br.com.ejb.persistence.mapping.Address.AddressInfo;
 import br.com.ejb.stateless.GenericRemoteBean;
 
 import javax.naming.Context;
@@ -84,7 +85,7 @@ public class Cap10Client {
 		 * ======================================================================================================================================
 		 */
 		final GenericRemoteBean<Address, Integer> bean = (GenericRemoteBean<Address, Integer>) ctx.lookup("cap10-ejb/AddressBeanImpl!br.com.ejb.stateless.GenericRemoteBean");
-		final Address.AddressInfo info = new Address.AddressInfo("São Paulo", "SP");
+		final AddressInfo info = new AddressInfo("São Paulo", "SP");
 		Address address = new Address(null, "Street", info);
 
 		address = bean.save(address);
