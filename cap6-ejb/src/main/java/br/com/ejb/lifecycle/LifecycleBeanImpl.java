@@ -28,7 +28,7 @@ import javax.ejb.Stateful;
  * Quando um EJB esta na fase Method-Ready, ele pode tanto voltar para a fase Does Not Exist ou entrar na fase Passivated. Quando um EJB
  * atinge o timeout, ele volta para a fase Does Not Exist, onde o container libera o objeto para o GC (o timeout é definido de acordo com
  * a implementacao do container EJB). Outro fato que faz com que um EJB saia da fase Method-Ready e volte para Does Not Exist é quando algum
- * metodo de negocio lanca uma system exception (ou seja, qualquer cheched exception que nao esteja anotada com '@ApplicationException').
+ * metodo de negocio lanca uma system exception (ou seja, qualquer uncheched exception que nao esteja anotada com '@ApplicationException').
  * Quando um metodo de negocio lanca um system exception, o container libera o objeto para o GC e qualquer metodo anotado com '@PreDestroy'
  * nao sera invocado. Por fim, quando um metodo de negocio marcado com '@Remove' é invocado, apos a sua execucao o container destroy a
  * instancia do EJB e o coloca novamente na fase Does Not Exist.

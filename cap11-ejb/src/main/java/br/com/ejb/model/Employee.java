@@ -23,7 +23,7 @@ public class Employee implements Serializable {
 	/**
 	 * O relacionamento unidirecional One-To-One especifica a navegacao a partir do Employee para o Address, porém não é possível chegar em um Employee
 	 * através de um Address. A anotacao @JoinColumn define a criacao da foreign key. Caso o relacionamento esteja sendo feito no ID da entidade alvo,
-	 * o atribuno name deve ser especificado com o nome da coluna que será criada na entidade dona do relacionamento (Employee) e que será a foreign key para
+	 * o atributo name deve ser especificado com o nome da coluna que será criada na entidade dona do relacionamento (Employee) e que será a foreign key para
 	 * a entidade alvo (Address). Se o relacionamento estiver sendo feito em um campo que nao seja o ID, o atributo referencedColumnName deve ser utilizado.
 	 * Caso o relacionamento seja feito em chaves compostas, a anotacao @JoinColumns deve ser utilizada.
 	 * <p>
