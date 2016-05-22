@@ -1,6 +1,6 @@
 package br.com.ejb;
 
-import br.com.ejb.resource.ResourceRemoteBean;
+import br.com.ejb.jndi.JndiRemoteBean;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -23,8 +23,8 @@ public class Cap16Client {
 		 * Global JNDI e ENC
 		 * =================================================================================================
 		 */
-		/*final JndiRemoteBean bean = (JndiRemoteBean) ctx.lookup("cap16-ejb/JndiBeanImpl!br.com.ejb.jndi.JndiRemoteBean");
-		bean.execute();*/
+		final JndiRemoteBean bean = (JndiRemoteBean) ctx.lookup("cap16-ejb/JndiBeanImpl!br.com.ejb.jndi.JndiRemoteBean");
+		bean.execute();
 
 		/*
 		 * =================================================================================================
@@ -39,8 +39,8 @@ public class Cap16Client {
 		 * @Resource
 		 * =================================================================================================
 		 */
-		final ResourceRemoteBean bean = (ResourceRemoteBean) ctx.lookup("cap16-ejb/ResourceBeanImpl!br.com.ejb.resource.ResourceRemoteBean");
-		bean.execute();
+		/*final ResourceRemoteBean bean = (ResourceRemoteBean) ctx.lookup("cap16-ejb/ResourceBeanImpl!br.com.ejb.resource.ResourceRemoteBean");
+		bean.execute();*/
 	}
 
 }

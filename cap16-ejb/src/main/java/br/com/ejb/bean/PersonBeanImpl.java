@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
  */
 @Stateless
 //@LocalBean
-public class PersonBeanImpl implements PersonLocalBean {
+public class PersonBeanImpl implements PersonLocalBean{//, PersonRemoteBean {
 
 	private static final long serialVersionUID = 6836565252311905366L;
 

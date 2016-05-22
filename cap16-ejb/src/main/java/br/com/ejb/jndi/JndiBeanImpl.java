@@ -12,7 +12,6 @@ import javax.naming.NamingException;
 /**
  * A especificacao de EJB 3.1 define um namespace JNDI global que deve ser seguido por todos os containers EJB que implementam a especificacao.
  * Esse contexto global possui o seguinte formato:
- * <p>
  * java:global/[app-name]/module-name/bean-name![fully qualifield name of the view interface]
  * <p>
  * As partes entre colchetes sao opcionais, ou seja app-name (nome do EAR) e o nome totalmente qualificado da interface de visualizacao
