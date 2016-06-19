@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd" version="3.1">
+
+	<assembly-descriptor>
+		<!-- É possivel definir interceptors atraves de XML de uma maneira mais flexivel -->
+		<!-- Neste caso, o interceptor AuditInterceptor sera aplicado ao metodo generateToken(int) do EJB TokenBeanImpl.
+		 	 (Equivalente a anotacao @Interceptors a nivel de metodo) -->
+		<interceptor-binding>
+			<ejb-name>TokenBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.AuditInterceptor</interceptor-class>
+
+			<!-- Para desabilitar os interceptors definidos na classe durante a chamada de um metodo especifico, basta especificar
+				 o elemento exclude-class-interceptors com o valor true. (Equivalente a anotacao @ExcludeClassInterceptors) -->
+			<!--<exclude-class-interceptors>true</exclude-class-interceptors>-->
+
+			<!-- Para desabilitar interceptors default (globais) definidos atraves do coringa (*), basta especificar o elemento
+				 exclude-default-interceptors com o valor true. (Equivalente a anotacao @ExcludeDefaultInterceptors) -->
+			<!--<exclude-default-interceptors>true</exclude-default-interceptors>-->
+
+			<method>
+				<method-name>generateToken</method-name>
+				<method-params>
+					<method-param>int</method-param>
+				</method-params>
+			</method>
+		</interceptor-binding>
+
+		<!-- Para definir um interceptor para todos os metodos de um EJB, basta nao especificar o elemento method.
+			 (Equivalente a anotacao @Interceptors a nivel de classe) -->
+		<!--<interceptor-binding>
+			<ejb-name>TokenBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.AuditInterceptor</interceptor-class>
+		</interceptor-binding>-->
+
+		<!-- Atraves do XML é possivel especificar interceptors default (globais) utilizando o coringa (*) -->
+		<interceptor-binding>
+			<ejb-name>*</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.ValidationInterceptor</interceptor-class>
+		</interceptor-binding>
+	</assembly-descriptor>
+
+</ejb-jar>
