@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
+		 version="3.1">
+
+	<assembly-descriptor>
+		<!-- =================================== Logging Interceptor =================================== -->
+		<interceptor-binding>
+			<ejb-name>GreetingsBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+		</interceptor-binding>
+
+		<interceptor-binding>
+			<ejb-name>TaskBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+		</interceptor-binding>
+
+		<interceptor-binding>
+			<ejb-name>ClientBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+		</interceptor-binding>
+
+		<interceptor-binding>
+			<ejb-name>InternalBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+		</interceptor-binding>
+
+		<interceptor-binding>
+			<ejb-name>MessageBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+		</interceptor-binding>
+
+		<!-- =================================== Security Roles =================================== -->
+		<security-role>
+			<role-name>admin</role-name>
+		</security-role>
+
+		<security-role>
+			<role-name>user</role-name>
+		</security-role>
+
+		<security-role>
+			<role-name>root</role-name>
+		</security-role>
+
+		<!-- =================================== Method Permissions =================================== -->
+		<!-- Com o elemento method-permission é possivel definir configuracoes de seguranca para os metodos de negocio dos EJBs.
+			 É papel do Application Assembler realizar estas configuracoes. -->
+		<method-permission>
+			<!-- É possivel especificar varias roles. Neste caso, o cliente precisa ter pelo menos uma das roles informadas -->
+			<!--<role-name>admin</role-name>-->
+			<role-name>user</role-name>
+			<method>
+				<!-- Se existir mais de um metodo com o mesmo nome dentro de um EJB e os parametros nao forem especificados na
+					 configuracao de seguranca de metodo, a regra se aplicara para todos os metodos que possuirem o nome informado -->
+				<ejb-name>MessageBeanImpl</ejb-name>
+				<method-name>message1</method-name>
+			</method>
+		</method-permission>
+
+		<!-- As definicoes de method permissions no arquivo XML sobrescrevem as anotacoes @RolesAllowed, @PermitAll e @DenyAll -->
+		<method-permission>
+			<role-name>root</role-name>
+			<method>
+				<ejb-name>MessageBeanImpl</ejb-name>
+				<method-name>message1</method-name>
+			</method>
+			<method>
+				<ejb-name>MessageBeanImpl</ejb-name>
+				<method-name>message2</method-name>
+				<method-params>
+					<method-param>java.lang.String</method-param>
+				</method-params>
+			</method>
+		</method-permission>
+
+		<!-- Neste caso, apenas o metodo message2() que nao recebe nenhum parametro podera ser invocado por qualquer usuario, pois
+			 o metodo que recebe uma String precisa que o cliente possua a role root, que foi definido na configuracao acima. Logo,
+			 esta configuracao nao sobrescreve a anterior. -->
+		<method-permission>
+			<unchecked/>
+			<method>
+				<ejb-name>MessageBeanImpl</ejb-name>
+				<method-name>message2</method-name>
+
+				<!-- Mesmo que estas linhas sejam descomentadas, a configuracao de permissao de metodo considerada será a mais restritiva,
+					 ou seja, a configuracao que exige que o usuario possua a role root. -->
+				<!--<method-params>
+					<method-param>java.lang.String</method-param>
+				</method-params>-->
+			</method>
+		</method-permission>
+
+		<!-- Apesar da role superRole nao estar definida como uma security-role, existe uma configuracao de mapeamento entre superRole
+			 e admin feita atraves do elemento security-role-ref abaixo. -->
+		<method-permission>
+			<role-name>superRole</role-name>
+			<method>
+				<ejb-name>MessageBeanImpl</ejb-name>
+				<method-name>message4</method-name>
+			</method>
+		</method-permission>
+	</assembly-descriptor>
+
+	<enterprise-beans>
+		<session>
+			<ejb-name>MessageBeanImpl</ejb-name>
+			<!-- O elemento security-role-ref possibilita o mapeamento de uma role especifica utilizada por um EJB para uma role definida
+				 nos elementos security-role. É papel do Deployer realizar este mapeamento. -->
+			<security-role-ref>
+				<!-- role-name é a role utilizada dentro do EJB -->
+				<role-name>owner</role-name>
+
+				<!-- role-link é a role definida nos elementos security-role -->
+				<role-link>root</role-link>
+			</security-role-ref>
+
+			<security-role-ref>
+				<role-name>superRole</role-name>
+				<role-link>admin</role-link>
+			</security-role-ref>
+
+			<!-- O elemento security-identity permite que seja especificada a role que um EJB sera executado.
+				 Esta configuracao atraves de XML sempre sobrescrevera a anotacao @RunAs. -->
+			<security-identity>
+				<run-as>
+					<role-name>admin</role-name>
+				</run-as>
+			</security-identity>
+		</session>
+	</enterprise-beans>
+
+</ejb-jar>
