@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		 version="3.0">
+
+	<!-- A partir da versao 3.0 da especificacao de Servlets, é possivel definir o nome do modulo que sera utilizado
+		 nos nomes JNDI da aplicacao WAR. Para isso, basta especificar o elemento module-name. Desta forma, todos os
+		 nomes JNDI deste WAR, inclusive os EJBs, passarao a pertencer ao modulo cookbook-cap1. Ex.:
+		 java:global/cookbook-cap1/GreetingsBeanImpl -->
+	<module-name>cookbook-cap1</module-name>
+
+</web-app>
