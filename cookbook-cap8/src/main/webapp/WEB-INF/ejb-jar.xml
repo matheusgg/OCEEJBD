@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd" version="3.1">
+
+	<!-- Para um interceptor poder ser utilizado como interceptor default é preciso que ele seja registrado
+	 	 com o elemento interceptors no ejb-jar.xml. -->
+	<interceptors>
+		<interceptor>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+		</interceptor>
+		<interceptor>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor2</interceptor-class>
+		</interceptor>
+	</interceptors>
+
+	<assembly-descriptor>
+		<interceptor-binding>
+			<ejb-name>*</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+			<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor2</interceptor-class>
+
+			<!-- Default interceptors nao podem especificar o elemento interceptor-order. -->
+			<!--<interceptor-order>
+				<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor2</interceptor-class>
+				<interceptor-class>br.com.ejb.interceptors.LoggingInterceptor</interceptor-class>
+			</interceptor-order>-->
+
+			<!-- Default interceptors nao podem ser definidos para metodos específicos. -->
+			<!--<method>
+				<method-name>getClientName</method-name>
+			</method>-->
+		</interceptor-binding>
+	</assembly-descriptor>
+
+</ejb-jar>
