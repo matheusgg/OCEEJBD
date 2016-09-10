@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd" version="3.1">
+
+
+	<interceptors>
+		<!-- Declarando um interceptor e definindo os metodos interceptores de negocio e de callback -->
+		<interceptor>
+			<interceptor-class>br.com.ejb.interceptors.SimpleInterceptor</interceptor-class>
+			<post-construct>
+				<!-- O elemento lifecycle-callback-class é opcional, uma vez que a classe será a mesma que a declarada
+					 no elemento interceptor-class -->
+				<!--<lifecycle-callback-class>br.com.ejb.interceptors.SimpleInterceptor/lifecycle-callback-class>-->
+				<lifecycle-callback-method>preInit</lifecycle-callback-method>
+			</post-construct>
+
+			<around-invoke>
+				<!-- O elemento class é opcional -->
+				<!--<class>br.com.ejb.interceptors.SimpleInterceptor/class>-->
+				<method-name>invoke</method-name>
+			</around-invoke>
+
+			<around-timeout>
+				<!-- O elemento class é opcional -->
+				<!--<class>br.com.ejb.interceptors.SimpleInterceptor/class>-->
+				<method-name>invokeTimeout</method-name>
+			</around-timeout>
+		</interceptor>
+	</interceptors>
+
+	<assembly-descriptor>
+		<!-- Default Interceptor -->
+		<!--<interceptor-binding>
+			<ejb-name>*</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.SimpleInterceptor/interceptor-class>
+		</interceptor-binding>-->
+
+		<!-- Excluindo default e class interceptors -->
+		<!--<interceptor-binding>
+			<ejb-name>SimpleBeanImpl</ejb-name>
+			<exclude-default-interceptors>true</exclude-default-interceptors>
+			<exclude-class-interceptors>true</exclude-class-interceptors>
+			<method>
+				<method-name>execute</method-name>
+				<method-params>
+					<method-param>java.lang.String</method-param>
+				</method-params>
+			</method>
+		</interceptor-binding>-->
+
+		<!-- Aplicando um interceptor em apenas um metodo de timeout -->
+		<!--<interceptor-binding>
+			<ejb-name>SimpleBeanImpl</ejb-name>
+			<interceptor-class>br.com.ejb.interceptors.SimpleInterceptor/interceptor-class>
+			<method>
+				<method-name>timeout</method-name>
+			</method>
+		</interceptor-binding>-->
+
+		<!-- Definindo os atributos de transacao para os metodos do EJB SecondBeanImpl -->
+		<container-transaction>
+			<method>
+				<ejb-name>SecondBeanImpl</ejb-name>
+				<method-name>getMessage</method-name>
+			</method>
+			<trans-attribute>Never</trans-attribute>
+		</container-transaction>
+
+		<container-transaction>
+			<method>
+				<ejb-name>SecondBeanImpl</ejb-name>
+				<method-name>getMessage2</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+</ejb-jar>
